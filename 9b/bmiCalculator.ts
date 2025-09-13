@@ -47,4 +47,4 @@ if (require.main === module) {
 }
 
 
-export default calculateBmi
+export default calculateBmi;

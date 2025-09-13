@@ -42,16 +42,16 @@ function parseArguments(args: string[]): StandardInput {
     }
   });
 
-  const exerciseDataInput = args.slice(3)
+  const exerciseDataInput = args.slice(3);
   return {
     targetDays: Number(args[2]),
     exerciseRecord: exerciseDataInput.map(Number)
   };
 }
 
-function calculateExercise(args: string[]): Summary {
+function calculateExercise(targetDays: number, exerciseRecord: number[]): Summary {
 
-  const { targetDays, exerciseRecord } = parseArguments(args)
+
 
   return {
     periodLength: exerciseRecord.length,
@@ -62,16 +62,18 @@ function calculateExercise(args: string[]): Summary {
     target: targetDays,
     average: (exerciseRecord
       .reduce((prev, next) => prev + next, 0)) / exerciseRecord.length,
-  }
+  };
 }
 
-try {
-  console.log(calculateExercise(process.argv))
-} catch (error: unknown) {
-  let errorMsg = 'Something bad happened.'
-  if (error instanceof Error) {
-    errorMsg += ' Error: ' + error.message
+if (require.main === module) {
+  try {
+    const { targetDays, exerciseRecord } = parseArguments(process.argv);
+    console.log(calculateExercise(targetDays, exerciseRecord));
+  } catch (error: unknown) {
+    let errorMsg = 'Something bad happened.';
+    if (error instanceof Error) {
+      errorMsg += ' Error: ' + error.message;
+    }
+    console.log(errorMsg);
   }
-  console.log(errorMsg);
-  
 }
