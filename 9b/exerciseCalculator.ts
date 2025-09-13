@@ -77,3 +77,5 @@ if (require.main === module) {
     console.log(errorMsg);
   }
 }
+
+export default calculateExercise;
