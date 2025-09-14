@@ -1,5 +1,5 @@
 import { NonSensitivePatientData } from '../types';
-import patientData from '../../data/patients'
+import patientData from '../../data/patients';
 
 const getNonSensitivePatientData = (): NonSensitivePatientData[] => {
   return patientData.map(p => ({
@@ -9,6 +9,6 @@ const getNonSensitivePatientData = (): NonSensitivePatientData[] => {
     gender: p.gender,
     occupation: p.occupation
   }));
-}
+};
 
-export default { getNonSensitivePatientData }
+export default { getNonSensitivePatientData };
