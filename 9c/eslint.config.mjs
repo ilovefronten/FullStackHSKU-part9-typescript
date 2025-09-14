@@ -30,5 +30,6 @@ export default tseslint.config({
       'error',
       { 'argsIgnorePattern': '^_' }
     ],
+    'quotes': ['error', 'single'],
   },
 });
