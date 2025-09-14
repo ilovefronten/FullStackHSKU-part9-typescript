@@ -17,6 +17,7 @@ export default tseslint.config({
   plugins: {
     "@stylistic": stylistic,
   },
+  ignores: ["build/*"], // Stop ESlint interpreting the files in the _build_ directory.
   rules: {
     '@stylistic/semi': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'error',
