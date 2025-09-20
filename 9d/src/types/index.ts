@@ -9,18 +9,21 @@ export interface CoursePartDescription extends CoursePartBase {
 }
 
 export interface CoursePartBasic extends CoursePartDescription {
-  kind: "basic";
+  kind: 'basic';
 }
 
 export interface CoursePartGroup extends CoursePartBase {
   groupProjectCount: number;
-  kind: "group";
+  kind: 'group';
 }
 
 export interface CoursePartBackground extends CoursePartDescription {
   backgroundMaterial: string;
-  kind: "background";
+  kind: 'background';
 }
 
 export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
 
+export interface CourseInfoProps {
+  course: CoursePart;
+}
