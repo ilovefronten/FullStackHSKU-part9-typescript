@@ -45,6 +45,20 @@ const Part = (props: CourseInfoProps) => {
           </p>
         </>
       );
+    case 'special':
+      return (
+        <>
+          <p>
+            <b>{coursePart.name} {coursePart.exerciseCount}</b>
+            <br />
+            <i>{coursePart.description}</i>
+            <br />
+            <span>required skills:&nbsp;
+              {coursePart.requirements.join(', ')}
+            </span>
+          </p>
+        </>
+      );
 
     default:
       assertNever(coursePart);

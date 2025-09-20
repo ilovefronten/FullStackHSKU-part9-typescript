@@ -22,7 +22,12 @@ export interface CoursePartBackground extends CoursePartDescription {
   kind: 'background';
 }
 
-export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
+export interface CoursePartRequirement extends CoursePartDescription {
+  requirements: string[];
+  kind: 'special'
+}
+
+export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground | CoursePartRequirement;
 
 export interface CourseInfoProps {
   course: CoursePart;
