@@ -3,6 +3,7 @@ import { NewDiary } from '../types';
 
 type DiaryFormProps = {
   addDiary: (newDiary: NewDiary) => void;
+  msg: string
 }
 
 type NoticeProps = {
@@ -23,13 +24,12 @@ const Notice = ({ msg }: NoticeProps) => {
   );
 };
 
-const DiaryForm = ({ addDiary }: DiaryFormProps) => {
+const DiaryForm = ({ addDiary, msg }: DiaryFormProps) => {
 
   const [date, setDate] = useState<string>('');
   const [visibility, setVisibility] = useState<string>('');
   const [weather, setWeather] = useState<string>('');
   const [comment, setComment] = useState<string>('');
-  const [msg, setMsg] = useState<string>('TESTTEST');
 
   const addDiaryEntry = (event: React.SyntheticEvent) => {
     event.preventDefault();

@@ -23,6 +23,7 @@ const DiaryEntry = ({ diary }: DiaryEntryProps) => {
 
 function App() {
   const [diaries, setDiaries] = useState<NonSensitiveDiary[]>([]);
+  const [msg, setMsg] = useState<string>('');
 
   useEffect(() => {
     axios.get<NonSensitiveDiary[]>(baseUrl)
@@ -37,22 +38,36 @@ function App() {
   // Add new diary
   const addDiary = (newDiary: NewDiary) => {
     console.log(newDiary);
-    createNewDiary(newDiary).then(({ id, weather, visibility, date }) => {
-      const newNonSensitiveDiary: NonSensitiveDiary = {
-        id,
-        weather,
-        visibility,
-        date
-      };
-      //! 更好的更新方法，防止异步下拿到的还是日记的旧值
-      setDiaries(prev => prev.concat(newNonSensitiveDiary));
-    });
+    createNewDiary(newDiary)
+      .then(({ id, weather, visibility, date }) => {
+        const newNonSensitiveDiary: NonSensitiveDiary = {
+          id,
+          weather,
+          visibility,
+          date
+        };
+        //! 更好的更新方法，防止异步下拿到的还是日记的旧值
+        setDiaries(prev => prev.concat(newNonSensitiveDiary));
+        setMsg('');
+      })
+      .catch(err => {
+        if (axios.isAxiosError(err)) {
+          console.log(err.status);
+          console.log(err.response);
+          //! 防止返回的data为空
+          const message = err.response?.data as string ?? 'Unknown error';
+          setMsg(message);
+        } else {
+          console.log('Unknown error:');
+          console.log(err);
+        }
+      });
   };
 
 
   return (
     <>
-      <DiaryForm addDiary={addDiary} />
+      <DiaryForm addDiary={addDiary} msg={msg} />
       <h2>Diary Entries</h2>
       {diaries.map(d =>
         (<DiaryEntry diary={d} key={d.id} />))
