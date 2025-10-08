@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { NonSensitiveDiary } from './types/index';
+import { NewDiary, NonSensitiveDiary } from './types/index';
 import DiaryForm from './components/DiaryForm';
+import { baseUrl, createNewDiary } from './services/diaryService';
 
 type DiaryEntryProps = {
   diary: NonSensitiveDiary;
@@ -24,7 +25,7 @@ function App() {
   const [diaries, setDiaries] = useState<NonSensitiveDiary[]>([]);
 
   useEffect(() => {
-    axios.get<NonSensitiveDiary[]>('http://localhost:3000/api/diaries')
+    axios.get<NonSensitiveDiary[]>(baseUrl)
       .then(res => {
         console.log(res.data);
         setDiaries(res.data);
@@ -33,10 +34,25 @@ function App() {
 
   }, []);
 
+  // Add new diary
+  const addDiary = (newDiary: NewDiary) => {
+    console.log(newDiary);
+    createNewDiary(newDiary).then(({ id, weather, visibility, date }) => {
+      const newNonSensitiveDiary: NonSensitiveDiary = {
+        id,
+        weather,
+        visibility,
+        date
+      };
+      //! 更好的更新方法，防止异步下拿到的还是日记的旧值
+      setDiaries(prev => prev.concat(newNonSensitiveDiary));
+    });
+  };
+
 
   return (
     <>
-      <DiaryForm />
+      <DiaryForm addDiary={addDiary} />
       <h2>Diary Entries</h2>
       {diaries.map(d =>
         (<DiaryEntry diary={d} key={d.id} />))

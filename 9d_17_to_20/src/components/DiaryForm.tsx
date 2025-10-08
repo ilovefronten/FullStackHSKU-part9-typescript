@@ -1,19 +1,26 @@
 import { useState } from 'react';
+import { NewDiary } from '../types';
 
-const DiaryForm = () => {
+type DiaryFormProps = {
+  addDiary: (newDiary: NewDiary) => void;
+}
 
-  const [date, setDate] = useState('');
-  const [visibility, setVisibility] = useState('');
-  const [weather, setWeather] = useState('');
-  const [comment, setComment] = useState('');
+const DiaryForm = ({ addDiary }: DiaryFormProps) => {
+
+  const [date, setDate] = useState<string>('');
+  const [visibility, setVisibility] = useState<string>('');
+  const [weather, setWeather] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
 
   const addDiaryEntry = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    console.log(date);
-    console.log(visibility);
-    console.log(weather);
-    console.log(comment);
-    
+    const newDiary: NewDiary = {
+      date,
+      visibility,
+      weather,
+      comment,
+    };
+    addDiary(newDiary);
 
 
   };
@@ -44,9 +51,9 @@ const DiaryForm = () => {
         </div>
         <div>
           <label>
-            weather: 
-            <input 
-              name='weather' 
+            weather:
+            <input
+              name='weather'
               value={weather}
               onChange={({ target }) => setWeather(target.value)}
             />
@@ -54,11 +61,11 @@ const DiaryForm = () => {
         </div>
         <div>
           <label>
-            comment: 
-            <input 
-              name='comment' 
+            comment:
+            <input
+              name='comment'
               value={comment}
-              onChange={({ target }) => setComment(target.value)}  
+              onChange={({ target }) => setComment(target.value)}
             />
           </label>
         </div>
