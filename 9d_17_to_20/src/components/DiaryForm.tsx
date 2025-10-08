@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 const DiaryForm = () => {
 
-  const [date, setDate] = useState('')
-  const [visibility, setVisibility] = useState('')
-  const [weather, setWeather] = useState('')
-  const [comment, setComment] = useState('')
+  const [date, setDate] = useState('');
+  const [visibility, setVisibility] = useState('');
+  const [weather, setWeather] = useState('');
+  const [comment, setComment] = useState('');
 
   const addDiaryEntry = (event: React.SyntheticEvent) => {
-    event.preventDefault()
+    event.preventDefault();
     console.log(date);
     console.log(visibility);
     console.log(weather);
@@ -16,7 +16,7 @@ const DiaryForm = () => {
     
 
 
-  }
+  };
 
   return (
     <>
@@ -65,8 +65,8 @@ const DiaryForm = () => {
         <button type='submit'>add</button>
       </form>
     </>
-  )
+  );
 
-}
+};
 
-export default DiaryForm
+export default DiaryForm;
