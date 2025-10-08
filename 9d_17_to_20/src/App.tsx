@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NonSensitiveDiary } from './types/index';
+import DiaryForm from './components/DiaryForm';
 
 type DiaryEntryProps = {
   diary: NonSensitiveDiary;
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <>
+      <DiaryForm />
       <h2>Diary Entries</h2>
       {diaries.map(d =>
         (<DiaryEntry diary={d} key={d.id} />))
