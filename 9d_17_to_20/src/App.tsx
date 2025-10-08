@@ -1,11 +1,44 @@
-// import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { NonSensitiveDiary } from './types/index';
+
+type DiaryEntryProps = {
+  diary: NonSensitiveDiary;
+}
+
+const DiaryEntry = ({ diary }: DiaryEntryProps) => {
+  return (
+    <>
+      <div>
+        <h3>{diary.date}</h3>
+        <span>visibility: {diary.visibility}</span>
+        <br />
+        <span>weather: {diary.weather}</span>
+      </div>
+    </>
+  );
+};
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [diaries, setDiaries] = useState<NonSensitiveDiary[]>([]);
+
+  useEffect(() => {
+    axios.get<NonSensitiveDiary[]>('http://localhost:3000/api/diaries')
+      .then(res => {
+        console.log(res.data);
+        setDiaries(res.data);
+      })
+      .catch(err => console.error(err));
+
+  }, []);
+
 
   return (
     <>
-      <div></div>
+      <h2>Diary Entries</h2>
+      {diaries.map(d =>
+        (<DiaryEntry diary={d} key={d.id} />))
+      }
     </>
   );
 }
