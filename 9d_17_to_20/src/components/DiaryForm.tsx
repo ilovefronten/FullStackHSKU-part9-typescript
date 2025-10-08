@@ -5,12 +5,31 @@ type DiaryFormProps = {
   addDiary: (newDiary: NewDiary) => void;
 }
 
+type NoticeProps = {
+  msg: string;
+}
+
+const errorStyle = {
+  color: 'red',
+  margin: '15px'
+};
+
+const Notice = ({ msg }: NoticeProps) => {
+
+  return (
+    <>
+      <div style={errorStyle}>{msg}</div>
+    </>
+  );
+};
+
 const DiaryForm = ({ addDiary }: DiaryFormProps) => {
 
   const [date, setDate] = useState<string>('');
   const [visibility, setVisibility] = useState<string>('');
   const [weather, setWeather] = useState<string>('');
   const [comment, setComment] = useState<string>('');
+  const [msg, setMsg] = useState<string>('TESTTEST');
 
   const addDiaryEntry = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -29,6 +48,7 @@ const DiaryForm = ({ addDiary }: DiaryFormProps) => {
     <>
       <form onSubmit={addDiaryEntry}>
         <h2>Add new Entry</h2>
+        <Notice msg={msg} />
         <div>
           <label>
             date:
