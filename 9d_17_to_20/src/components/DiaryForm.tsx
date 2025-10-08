@@ -53,6 +53,7 @@ const DiaryForm = ({ addDiary, msg }: DiaryFormProps) => {
           <label>
             date:
             <input
+              type='date'
               name='date'
               value={date}
               onChange={({ target }) => setDate(target.value)}
@@ -60,23 +61,90 @@ const DiaryForm = ({ addDiary, msg }: DiaryFormProps) => {
           </label>
         </div>
         <div>
+          visibility:
           <label>
-            visibility:
             <input
+              type='radio'
               name='visibility'
-              value={visibility}
+              value='great'
               onChange={({ target }) => setVisibility(target.value)}
             />
+            great
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='visibility'
+              value='good'
+              onChange={({ target }) => setVisibility(target.value)}
+            />
+            good
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='visibility'
+              value='ok'
+              onChange={({ target }) => setVisibility(target.value)}
+            />
+            ok
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='visibility'
+              value='poor'
+              onChange={({ target }) => setVisibility(target.value)}
+            />
+            poor
           </label>
         </div>
         <div>
+          weather:
           <label>
-            weather:
             <input
+              type='radio'
               name='weather'
-              value={weather}
+              value='sunny'
               onChange={({ target }) => setWeather(target.value)}
             />
+            sunny
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='weather'
+              value='cloudy'
+              onChange={({ target }) => setWeather(target.value)}
+            />
+            cloudy
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='weather'
+              value='rainy'
+              onChange={({ target }) => setWeather(target.value)}
+            />
+            rainy
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='weather'
+              value='stormy'
+              onChange={({ target }) => setWeather(target.value)}
+            />
+            stormy
+          </label>
+          <label>
+            <input
+              type='radio'
+              name='weather'
+              value='windy'
+              onChange={({ target }) => setWeather(target.value)}
+            />
+            windy
           </label>
         </div>
         <div>
